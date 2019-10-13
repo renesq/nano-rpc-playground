@@ -1,0 +1,62 @@
+<!doctype html>
+<head>
+<title>NANO RPC "shell" simulator</title>
+
+<meta property="og:title" content="RPC playground for the NANO network" />
+<meta property="og:description" content="Playground for experimenting with the NANO node" />
+<meta property="og:image" content="http://static.nanoo.tools/og-logo-tools.png" />
+
+<script type="text/javascript">  
+// Prefill form field with an example
+function sampledata1() { 
+	document.getElementById("fieldinput").innerHTML = '{ "action":"version" }' ;  
+}
+function sampledata2() { 
+	document.getElementById("fieldinput").innerHTML = '{ \r\n\
+	"action" : "account_history", \r\n\
+	"account" : "nano_3too1sgot4c9h3zqsgk7tknh3cazcj5q7x7mn4kmh3ng76q6pqzth55ibhnh" \r\n\
+}' ;  
+}
+
+</script>
+ 
+</head>
+<body>
+
+<article id="mainArticle"> 
+ 
+<section>
+<h2>NANO RPC playground</h2>
+<p>Want to experiment with NANO but neither have a synchronized node ready nor want to fiddle around with cURL? This website will allow you to send your RPC json to a public NANO node from within the browser window and immediately see the response.</p> 
+
+<p>For a description of all RPC actions, go to <a href="https://docs.nano.org/commands/rpc-protocol/">https://docs.nano.org/commands/rpc-protocol/</a></p>
+
+<form action="https://heytip.me/publicnanodeprocessor/" method="post" target="responseiframe">  
+	
+	 <label for="fieldinput" style="font-weight:bold;">Input json:</label> <br /> 
+	 <textarea id="fieldinput" name="jsoninput" class="form64 textarea3" style="height:9em; width:100%; font-size:110%; word-break:break-all;"></textarea> 
+	<input type="submit" class="buttona buttongreen" role="button" value=" send to node " />
+	<a class="buttona"  href="#" role="button"  onclick="sampledata1(); return false;" style="font-size:85%">sample "version"</a>
+	<a class="buttona"  href="#" role="button"  onclick="sampledata2(); return false;" style="font-size:85%">sample "account_history"</a>
+	<a class="buttona buttonred"  href="#" role="button"  onclick="document.getElementById('fieldinput').value = ''; document.getElementById('fieldresponse').src = 'about:blank';  return false;" >clear</a>
+	
+	<br />
+	<label for="fieldresponse" style="font-weight:bold;" >Response json:</label> <br />
+	<iframe id="fieldresponse" src="about:blank" class="copy" name="responseiframe" style="height:15em; width:100%;"></iframe>
+	
+</form>  
+
+<p>Known limitations: Wallets are not going to be persistent, they will be reset after some time. Output is capped at 25 elements. You can not use "stop","bootstrap","work_peers_clear","work_peer_add". Since the middleware is parsing the json, it may behave differently than the node. But the new node version should handle both strings and literals rather well.</p>
+
+<p>Future outlook: I will add human-readable decimals whenever a NANO amount is returned. I will also add a fully featured Nanode API, with a free plan for small apps, but also offering a paid proof-of-work service and cheap HTTP callback. The timestamps are going to be more accurate as soon as I import the correct timestamps.</p>
+
+<p>Sourcecode: <a href="https://github.com/renesq/nano-rpc-playground">https://github.com/renesq/nano-rpc-playground</a></p>
+
+</section>
+
+</article> 
+<aside id="sideBar"> 
+</aside>
+
+</footer>
+</body>
